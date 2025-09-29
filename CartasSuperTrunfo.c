@@ -16,96 +16,64 @@ typedef struct {
     int Populacao, PontosTuristicos;
 } SuperTrunfo;
 
-int main() {
-  // Criado duas instancias da estrutura SuperTrunfo para armazenar os dados das cartas.
-    SuperTrunfo carta1, carta2;
+// Funcao para preenchimento dos dados
+void PreencherCarta(SuperTrunfo *carta, int id){
+    carta->Id = id;
 
-  // Área para entrada de dados
-  printf("\n--- BEM VINDO AO SUPER TRUNFO --- \n");
-
-    /* Dados da primeira carta
-    ----------------------------------------------------*/
-    carta1.Id = 1;
-    printf("Entre com os dados da primeira carta... \n");
+    printf("Entre com os dados da carta %d\n", id);
     printf("\n");
 
     printf("Estado: ");
-    scanf(" %c", &carta1.Estado);                           // Acrescentar um espaco ignora o \n no buffer
+    scanf(" %c", &carta->Estado);                           // Acrescentar um espaco ignora o \n no buffer
 
     printf("Codigo (3 caracteres): ");
-    scanf(" %3s", carta1.Codigo);
+    scanf(" %3s", carta->Codigo);
 
     printf("Nome da cidade: ");
-    scanf(" %49[^\n]", carta1.NomeCidade);                  // Permite espacos no nome
+    scanf(" %49[^\n]", carta->NomeCidade);                  // Permite espacos no nome, para preencher strings compostas
 
     printf("Populacao: ");
-    scanf("%d", &carta1.Populacao);
+    scanf("%d", &carta->Populacao);
 
     printf("Area: ");
-    scanf("%f", &carta1.Area);
+    scanf("%f", &carta->Area);
 
     printf("PIB: ");
-    scanf("%f", &carta1.PIB);
+    scanf("%f", &carta->PIB);
 
     printf("Numero de pontos turisticos: ");
-    scanf("%d", &carta1.PontosTuristicos);
+    scanf("%d", &carta->PontosTuristicos);
     printf("\n\n");
+}
 
-    /* Dados da segunda carta
-    ----------------------------------------------------*/
-    carta2.Id = 2;
-    printf("Entre com os dados da segunda carta...\n");
+// Funcao para exibicao dos dados
+void ExibirCartas(SuperTrunfo carta){
+    printf("\n --------------------------------------------- \n");
+
+    printf("Carta - %d \n", carta.Id);
+    printf("Estado: %c \n", carta.Estado);
+    printf("Codigo: %s \n", carta.Codigo);
+    printf("Cidade: %s \n", carta.NomeCidade);
+    printf("Populacao: %d \n", carta.Populacao);
+    printf("Area: %.6f \n", carta.Area);
+    printf("PIB: %.6f \n", carta.PIB);
+    printf("Pontos turisticos: %d \n", carta.PontosTuristicos);
     printf("\n");
+}
 
-    printf("Estado: ");
-    scanf(" %c", &carta2.Estado);
+int main() {
+  // Criado duas instancias da estrutura SuperTrunfo para armazenar os dados das cartas.
+  SuperTrunfo carta1, carta2;
 
-    printf("Codigo: ");
-    scanf(" %3s", carta2.Codigo);
+  printf("\n--- BEM VINDO AO SUPER TRUNFO --- \n");
 
-    printf("Nome da cidade: ");
-    scanf(" %49[^\n]", carta2.NomeCidade);
-
-    printf("Populacao: ");
-    scanf("%d", &carta2.Populacao);
-
-    printf("Area: ");
-    scanf("%f", &carta2.Area);
-
-    printf("PIB: ");
-    scanf("%f", &carta2.PIB);
-
-    printf("Numero de pontos turisticos: ");
-    scanf("%d", &carta2.PontosTuristicos);
-    printf("\n");
-
+  // Área para entrada de dados
+  PreencherCarta(&carta1, 1);
+  PreencherCarta(&carta2, 2);
+    
   // Área para exibição dos dados da cidade
-  
-   // Carta - 1
-    printf("\n --------------------------------------------- \n");
-
-    printf("Carta - %d \n", carta1.Id);
-    printf("Estado: %c \n", carta1.Estado);
-    printf("Codigo: %s \n", carta1.Codigo);
-    printf("Cidade: %s \n", carta1.NomeCidade);
-    printf("Populacao: %d \n", carta1.Populacao);
-    printf("Area: %.6f \n", carta1.Area);
-    printf("PIB: %.6f \n", carta1.PIB);
-    printf("Pontos turisticos: %d \n", carta1.PontosTuristicos);
-
-    // Carta - 2
-    printf("\n --------------------------------------------- \n");
-
-    printf("Carta - %d \n", carta2.Id);
-    printf("Estado: %c \n", carta2.Estado);
-    printf("Codigo: %s \n", carta2.Codigo);
-    printf("Cidade: %s \n", carta2.NomeCidade);
-    printf("Populacao: %d \n", carta2.Populacao);
-    printf("Area: %.6f \n", carta2.Area);
-    printf("PIB: %.6f \n", carta2.PIB);
-    printf("Pontos turisticos: %d \n", carta2.PontosTuristicos);
-    printf("\n\n");
-
-
+  ExibirCartas(carta1);
+  ExibirCartas(carta2);
+   
   return 0;
 }
