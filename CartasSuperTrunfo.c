@@ -11,10 +11,25 @@
 typedef struct {
     int Id;
     char Estado;
-    float Area, PIB;
+    float Area, PIB, DensidadePopulacional, PIBPerCapita;
     char NomeCidade[50], Codigo[3];
     int Populacao, PontosTuristicos;
 } SuperTrunfo;
+
+/* Funcoes de calculos
+ *****************************************************************/
+float CalculaDensidade(SuperTrunfo c){
+    if(c.Populacao == 0 || c.Area == 0) return 0;
+
+    return c.Populacao / c.Area;
+}
+
+float CalculaPercapita(SuperTrunfo c){
+    if(c.PIB == 0 || c.Populacao == 0) return 0;
+
+    return c.PIB / c.Populacao;
+}
+/**************************************************************/
 
 // Funcao para preenchimento dos dados
 void PreencherCarta(SuperTrunfo *carta, int id){
@@ -58,6 +73,8 @@ void ExibirCartas(SuperTrunfo carta){
     printf("Area: %.6f \n", carta.Area);
     printf("PIB: %.6f \n", carta.PIB);
     printf("Pontos turisticos: %d \n", carta.PontosTuristicos);
+    printf("Densidade populacional: %.2f hab/km²\n", CalculaDensidade(carta));
+    printf("PIB per Capita: R$ %.2f\n", CalculaPercapita(carta));
     printf("\n");
 }
 
