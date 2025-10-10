@@ -16,8 +16,7 @@ typedef struct {
     int Populacao, PontosTuristicos;
 } SuperTrunfo;
 
-/* Funcoes de calculos
- *****************************************************************/
+// --- Funcoes de calculos
 float CalculaDensidade(SuperTrunfo c){
     if(c.Populacao == 0 || c.Area == 0) return 0;
 
@@ -29,7 +28,46 @@ float CalculaPercapita(SuperTrunfo c){
 
     return c.PIB / c.Populacao;
 }
-/**************************************************************/
+// ---
+
+void ExibirCartaVencedora(SuperTrunfo obj1, SuperTrunfo obj2){
+    printf("\n   A CARTA VENCEDORA FOI \n");
+    printf("--------------------------------\n");
+    printf("Resultado: Carta %d (%s) Venceu !\n", obj1.Id, obj1.NomeCidade);
+    printf("--------------------------------\n");
+    printf("Carta: %d - %s: %.3f \n", obj1.Id, obj1.NomeCidade, obj1.Area);
+    printf("Carta: %d - %s: %.3f \n", obj2.Id, obj2.NomeCidade, obj2.Area);
+    printf("--------------------------------\n");
+}
+
+/** FUNCAO EMPATE
+ * Caso alguma das properiedades selecionadas resulte em um empate,
+ * essa informacao e exibida para o usuario
+ */
+void ExibirCartaEmpate(SuperTrunfo obj1, SuperTrunfo obj2){
+    printf("\n      EMPATE \n");
+    printf("--------------------------------\n");
+    printf("Os dados comparados resultaram em um empate !\n");
+    printf("--------------------------------\n");
+    printf("Carta: %d - %s: %.3f \n", obj1.Id, obj1.NomeCidade, obj1.Area);
+    printf("Carta: %d - %s: %.3f \n", obj2.Id, obj2.NomeCidade, obj2.Area);
+    printf("--------------------------------\n");
+}
+
+/** FUNCAO DE COMPARACAO
+ * Recebe duas catas como parametro, e faz a comparacao das propriedades pre-selecionadas para verificar a carta vencedora
+ */
+void ComparaCartas(SuperTrunfo c1, SuperTrunfo c2){
+    if(c1.Area > c2.Area){
+        ExibirCartaVencedora(c1, c2);
+    }
+    else if(c2.Area > c1.Area){
+        ExibirCartaVencedora(c2, c1);
+    }
+    else{
+        ExibirCartaEmpate(c1, c2);
+    }
+}
 
 // Funcao para preenchimento dos dados
 void PreencherCarta(SuperTrunfo *carta, int id){
@@ -91,6 +129,9 @@ int main() {
   // Área para exibição dos dados da cidade
   ExibirCartas(carta1);
   ExibirCartas(carta2);
+
+  // Compara os dados da carta para definir a vencedora, chama uma funcao para exibir a carta vencedora de dentro do codigo.
+  ComparaCartas(carta1, carta2);
    
   return 0;
 }
